@@ -1,0 +1,19 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px;
+}
+.question-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.feedback {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
