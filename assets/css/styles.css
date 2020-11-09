@@ -48,10 +48,9 @@ header {
     justify-content: center;
     align-items: center;
 }
-.feedback {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#feedback {
+    text-align: center;
+    font-style: italic;
 }
 
 .hide {
