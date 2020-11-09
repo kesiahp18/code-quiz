@@ -7,6 +7,9 @@ var secondButton = document.getElementById('button2')
 var thirdButton = document.getElementById('button3')
 var fourthButton = document.getElementById('button4')
 var feedbackElement = document.getElementById('feedback')
+var timerElement = document.getElementById('timer')
+
+var timeInt = 0;
 
 var score = 0;
 
@@ -69,16 +72,27 @@ var questions = [
 //Function to start quiz
 function startQuiz() {
     //hide the start button
-    startButton.classList.add('hide')
+    startButton.classList.add('hide');
     //show the question
-    questionContainerElement.classList.remove('hide')
+    questionContainerElement.classList.remove('hide');
+    //start timer
+    timeLeft = 90;
+    timeInt = setInterval(function() {
+        if(timeLeft > 0) {
+            timerElement.textContent = "Time: " + timeLeft;
+            timeLeft--;
+        } else {
+            clearInterval(timeInt);
+            endQuiz();
+        }
+    }, 1000);
+    //go to first question
     displayQuestions();
 }
 
 //Function to cycle through the questions
 function displayQuestions(question) {
     //debugger;
-    //add the answer buttons text
     if(i < questions.length) {
         //add the question text
         questionElement.innerText = questions[i].question;
@@ -88,33 +102,56 @@ function displayQuestions(question) {
         document.getElementById("button3").innerText = questions[i].choices[2]
         document.getElementById("button4").innerText = questions[i].choices[3]
     }
+    //end the quiz when you run out of questions
     else {
         endQuiz();
     }
 }
 
+//Function to end the quiz
 function endQuiz() {
-    answerButtonsElement.classList.add('hide')
-    feedbackElement.classList.add('hide')
-    questionElement.innerText = "Your score is " + score
-
-    
+    //stop the timer
+    clearInterval(timeInt)
+    //hide irrelevant content
+    answerButtonsElement.classList.add('hide');
+    feedbackElement.classList.add('hide');
+    timerElement.classList.add('hide');
+    //show final score
+    questionElement.innerText = "Your score is " + score + "\nEnter your initials:";
+    //create input to enter initials
+    var initialInput = document.createElement("input");
+    questionContainerElement.appendChild(initialInput);
+    initialInput.classList.add("initial-input");
+    //create button to submit initials
+    var initialSubmit = document.createElement("button");
+    questionContainerElement.appendChild(initialSubmit);
+    initialSubmit.classList.add("button");
+    initialSubmit.innerText = "Submit";
+    questionContainerElement.classList.add("answers")
+    //TODO save score and initials to local storage
 }
 
+//Function to determine if answer is correct or not
 function checkAnswer(e) {
+    //
     var chosenAnswer = e.target
+    //if answer is correct
     if (chosenAnswer.innerText === questions[i].answer) {
-        feedbackElement.classList.remove('hide')
-        feedbackElement.innerText = "correct"
-        score++;
+        //tell the user they were correct
+        feedbackElement.classList.remove('hide');
+        feedbackElement.innerText = "correct";
+        //increase score
+        score += 20;
         i++;
-        displayQuestions()
+        displayQuestions();
     } else {
+        //tell the user they were incorrect
         feedbackElement.classList.remove('hide')
-        feedbackElement.innerText = "incorrect -5 seconds"
-        score--;
+        feedbackElement.innerText = "incorrect -10 seconds";
+        //take 10 seconds off time
+        timeLeft -= 10;
         i++;
-        displayQuestions()
+        displayQuestions();
     }
 }
 

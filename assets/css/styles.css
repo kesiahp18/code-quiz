@@ -56,3 +56,8 @@ header {
 .hide {
     display: none;
 }
+
+.initial-input {
+    padding: 8px;
+    margin: 20px;
+}
