@@ -122,13 +122,27 @@ function endQuiz() {
     var initialInput = document.createElement("input");
     questionContainerElement.appendChild(initialInput);
     initialInput.classList.add("initial-input");
+    console.log(initialInput)
     //create button to submit initials
     var initialSubmit = document.createElement("button");
     questionContainerElement.appendChild(initialSubmit);
     initialSubmit.classList.add("button");
     initialSubmit.innerText = "Submit";
     questionContainerElement.classList.add("answers")
-    //TODO save score and initials to local storage
+    initialSubmit.addEventListener('click', saveResults)
+}
+
+function saveResults() {
+    localStorage.setItem("score", score);
+    //localStorage.setItem("initials", )
+
+    var initials = document.querySelector(".initial-input").value;
+    if (!initials) {
+        feedbackElement.classList.remove('hide');
+        feedbackElement.innerText = "Please enter valid initials"
+    }
+    console.log(initials)
+    localStorage.setItem("initials", initials);
 }
 
 //Function to determine if answer is correct or not
@@ -154,6 +168,7 @@ function checkAnswer(e) {
         displayQuestions();
     }
 }
+
 
 startButton.addEventListener('click', startQuiz)
 firstButton.addEventListener('click', checkAnswer)
