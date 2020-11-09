@@ -29,6 +29,7 @@ header {
     padding: 10px;
     color:white;
 }
+
 .button:hover {
     background-color: var(--secondary-color);
 }
@@ -60,4 +61,14 @@ header {
 .initial-input {
     padding: 8px;
     margin: 20px;
+}
+
+.title {
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.scoreboard {
+    background-color: var(--primary-color);
+
 }

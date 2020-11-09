@@ -8,6 +8,11 @@ var thirdButton = document.getElementById('button3')
 var fourthButton = document.getElementById('button4')
 var feedbackElement = document.getElementById('feedback')
 var timerElement = document.getElementById('timer')
+var highScoresElement = document.getElementById('highscores')
+var viewScoresButton = document.getElementById('see-scores')
+var scoreBoardView = document.getElementById('score-board')
+var quizView = document.getElementById('quiz')
+var goBackButton = document.getElementById('go-back')
 
 var timeInt = 0;
 
@@ -17,54 +22,54 @@ var i = 0
 
 var questions = [
     {
-        question: 'Question 1 Here',
+        question: 'CSS stands for:',
         choices: [
-            "option 1",
-            "option 2",
-            "option 3",
-            "option 4"
+            "Calculating Social Security",
+            "Creating Secret Societies",
+            "Calling Special Services",
+            "Cascading Style Sheets"
         ],
-        answer: "option 4"
+        answer: "Cascading Style Sheets"
     },
     {
-        question: 'Question 2 Here',
+        question: 'Which of these is a flexbox property?',
         choices: [
-            "option 1.1",
-            "option 2",
-            "option 3",
-            "option 4"
+            "justify-content",
+            "text-align",
+            "border-width",
+            "background-color"
         ],
-        answer: "option 1"
+        answer: "justify-content"
     },
     {
-        question: 'Question 3 Here',
+        question: 'When are break statements used in javascript?',
         choices: [
-            "option 1.2",
-            "option 2",
-            "option 3",
-            "option 4"
+            "In conditional statements",
+            "At the end of every function",
+            "In loops and switch statements",
+            "Never"
         ],
-        answer: "answer 4"
+        answer: "Loops and switch statements"
     },
     {
-        question: 'Question 4 Here',
+        question: 'Which HTML element will appear the largest by deafault?',
         choices: [
-            "option 1.3",
-            "option 2",
-            "option 3",
-            "option 4"
+            "h1",
+            "h2",
+            "h3",
+            "h4"
         ],
-        answer: "option 4"
+        answer: "h1"
     },
     {
-        question: 'Question 5 Here',
+        question: 'Why are functions used in javascript?',
         choices: [
-            "option 1.4",
-            "option 2",
-            "option 3",
-            "option 4"
+            "To make code more readable",
+            "To keep code organized",
+            "It allows you to reuse code and repeat less",
+            "All of these"
         ],
-        answer: "answer 4"
+        answer: "All of these"
     }
 ]
 
@@ -128,21 +133,32 @@ function endQuiz() {
     questionContainerElement.appendChild(initialSubmit);
     initialSubmit.classList.add("button");
     initialSubmit.innerText = "Submit";
-    questionContainerElement.classList.add("answers")
-    initialSubmit.addEventListener('click', saveResults)
+    questionContainerElement.classList.add("answers");
+    initialSubmit.addEventListener('click', saveResults);
 }
 
 function saveResults() {
-    localStorage.setItem("score", score);
-    //localStorage.setItem("initials", )
 
     var initials = document.querySelector(".initial-input").value;
     if (!initials) {
         feedbackElement.classList.remove('hide');
         feedbackElement.innerText = "Please enter valid initials"
+        return saveResults()
     }
-    console.log(initials)
+    localStorage.setItem("score", score);
     localStorage.setItem("initials", initials);
+    addScore()
+}
+
+//Function to add score to High Score List
+function addScore() {
+    var lastScore = localStorage.getItem("score")
+    var lastInitials = localStorage.getItem("initials")
+    var result = document.createElement('li');
+    result.innerHTML = 'Score: ' + lastScore + " Initials: " + lastInitials;
+    document.body.appendChild(result)
+    result.classList.add('hide')
+    
 }
 
 //Function to determine if answer is correct or not
@@ -168,6 +184,17 @@ function checkAnswer(e) {
         displayQuestions();
     }
 }
+var goBack = function() {
+    scoreBoardView.classList.add('hide')
+    quizView.classList.remove('hide')
+}
+
+var viewHighScores = function() {
+    scoreBoardView.classList.remove('hide')
+    quizView.classList.add('hide')
+    document.getElementById('go-back').addEventListener('click', goBack)
+}
+
 
 
 startButton.addEventListener('click', startQuiz)
@@ -175,3 +202,5 @@ firstButton.addEventListener('click', checkAnswer)
 secondButton.addEventListener('click', checkAnswer)
 thirdButton.addEventListener('click', checkAnswer)
 fourthButton.addEventListener('click', checkAnswer)
+viewScoresButton.addEventListener('click', viewHighScores)
+goBackButton.addEventListener('click', goBack)
