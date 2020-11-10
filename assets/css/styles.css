@@ -1,21 +1,23 @@
 * {
+    margin: 0;
     box-sizing: border-box;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 :root {
     --primary-color: rgb(80, 128, 180);
     --secondary-color: rgb(129, 191, 224);
-    --incorrect-color: rgb(190, 0, 10);
-    --correct-color: rgb(0, 190, 10);
 }
 header {
     display: flex;
     justify-content: space-between;
-    margin: 30px;
+    padding: 30px 30px 15px 30px;
+    margin: 0 0 20px 0;
+    background-color: var(--secondary-color);
 }
 #question {
     display: block;
     text-align: center;
+    font-size: 24px;
 }
 .answers {
     display: flex;
@@ -68,7 +70,12 @@ header {
     text-align: center;
 }
 
-.scoreboard {
-    background-color: var(--primary-color);
+li {
+    background-color: var(--secondary-color);
+    margin: 5px;
+    padding: 2px 40px;
+}
 
+#score-board {
+    padding: 30px;
 }

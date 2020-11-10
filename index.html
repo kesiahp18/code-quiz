@@ -8,9 +8,10 @@
     <title>Code Quiz</title>
 </head>
 <body>
+    <section id="quiz">
     <header>
-        <div class="score-link">
-            <a href src="#">View High Scores</a>
+        <div class="score-button">
+            <button id="see-scores" class="button">View High Scores</button>
         </div>
         <div id="timer">
             Time:
@@ -27,9 +28,24 @@
     </div>
     <div class="controls">
         <button id="start-btn" class="button">Start</button>
+        <input id="initial-input" class="hide" />
+        <button id="initial-submit" class="button hide">
+            Submit
+        </button>
     </div>
     <div id="feedback" class="hide">
         <p>Incorrect</p>
     </div>
+    </section>
+
+    <section id="score-board" class="hide">
+        <h1 class="title">High Scores</h1>
+        <div class="scoreboard">
+            <ol id="highscores">
+            </ol>
+        </div>
+    
+     <button id="go-back" class="button">Take Again</button>
+    </section>
 </body>
 </html>
