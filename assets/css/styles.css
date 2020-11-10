@@ -76,6 +76,10 @@ li {
     padding: 2px 40px;
 }
 
+#timer {
+    height: min-content;
+}
+
 #score-board {
     padding: 30px;
 }
